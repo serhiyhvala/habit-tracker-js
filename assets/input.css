@@ -1,3 +1,82 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.header {
+	@apply flex items-center justify-between mb-10;
+}
+
+.form {
+	@apply absolute top-10 right-10 p-5 bg-white shadow-lg rounded-lg hidden;
+}
+
+.form-button {
+	@apply bg-black text-white cursor-pointer py-1 px-3 rounded;
+}
+
+.progress-wrapper {
+	@apply rounded-xl bg-black p-5 mb-10 mx-7;
+}
+
+.progress-header {
+	@apply text-white font-semibold mb-4 text-2xl text-center;
+}
+
+.progress-bar {
+	@apply bg-[#262923] text-center rounded-lg overflow-hidden font-semibold text-lg;
+}
+
+.progress-bar > div {
+	@apply transition-all duration-500 bg-[#f5f6f7];
+}
+
+.habit {
+	animation: zoomIn 0.6s;
+}
+
+.habit-header {
+	@apply flex items-center gap-4 mb-5;
+}
+
+.habit-header > img {
+	@apply rounded-3xl border-2 border-[#e2e4dd] border-solid;
+}
+
+.habit-plan {
+	@apply flex items-center justify-between;
+}
+
+.habit-plan > button {
+	@apply rounded-full opacity-20 border-2 border-solid border-black h-12 w-12 flex items-center justify-center text-lg uppercase font-semibold transition-opacity;
+}
+
+.habit-plan > button > img {
+  @apply hidden;
+}
+
+.habit-plan > button.checked {
+	@apply bg-black border-none opacity-100;
+}
+
+.habit-plan > button.checked > span {
+	@apply hidden;
+}
+
+.habit-plan > button.checked > img {
+	@apply inline-block;
+}
+
+@keyframes zoomIn {
+	from {
+    opacity: 0;
+		transform: scale(0.5);
+	}
+	60% {
+    opacity: 0.8;
+		transform: scale(1.15);
+	}
+	to {
+    opacity: 1;
+		transform: scale(1);
+	}
+}
