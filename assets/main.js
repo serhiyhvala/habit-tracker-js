@@ -5,7 +5,7 @@ const habits = [
         id: 1,
         img: "./assets/img/habit.svg",
         name: "No caffeine",
-        completed: [true, false, false, false, false, false, false],
+        completed: [false, false, false, false, false, false, false],
     },
 ];
 
@@ -16,19 +16,24 @@ alt=""><span>${dayName}</span></button>`
 
 const toggleHabit = (habitId, index) => {
     const elem = document.querySelectorAll(`[data-id = '${habitId}'] .habit-plan button`)
-
-    if(elem[index].classList.contains('checked'))
-    elem[index].classList.remove('checked')
-    else 
-    elem[index].classList.add('checked')
-    elem.innerHTML = '<img src="./assets/img/check.svg" width="25" alt="">'
-
     
-    // render(habits.map(habit => {
-    //     if(habit.name === habitName)
-    //     habit.completed[index] = !habit.completed[index]
-    //     return habit
-    // }))
+    const countDays = habits.length * 7
+    const percentOneDay = (100 / countDays)
+
+    const progressBarElem = document.querySelector('.progress-bar > div')
+
+    const isChecked = elem[index].classList.contains('checked');
+ 
+    if(isChecked)
+        elem[index].classList.remove('checked')
+    else
+        elem[index].classList.add('checked')
+        elem.innerHTML = '<img src="./assets/img/check.svg" width="25" alt="">'
+
+    const currentPercent = progressBarElem.textContent.replace('%', '')
+    const percent = isChecked ? +currentPercent - percentOneDay : +currentPercent + percentOneDay
+    progressBarElem.textContent = percent.toFixed(1) + `%`
+    progressBarElem.style.width = percent.toFixed(1) + `%`
 }
 
 const getWeekDaysElement = (habit) => {
