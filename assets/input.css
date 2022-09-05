@@ -8,7 +8,12 @@
 
 .form {
 	@apply absolute top-10 right-10 p-5 bg-white shadow-lg rounded-lg hidden;
+  animation: zoomIn 0.6s;
 }
+
+.form.open{
+  @apply block;
+} 
 
 .form-button {
 	@apply bg-black text-white cursor-pointer py-1 px-3 rounded;
@@ -31,6 +36,7 @@
 }
 
 .habit {
+  @apply mb-10;
 	animation: zoomIn 0.6s;
 }
 

@@ -31,9 +31,10 @@ const toggleHabit = (habitId, index) => {
         elem.innerHTML = '<img src="./assets/img/check.svg" width="25" alt="">'
 
     const currentPercent = progressBarElem.textContent.replace('%', '')
-    const percent = isChecked ? +currentPercent - percentOneDay : +currentPercent + percentOneDay
-    progressBarElem.textContent = percent.toFixed(1) + `%`
-    progressBarElem.style.width = percent.toFixed(1) + `%`
+    let percent = isChecked ? +currentPercent - percentOneDay : +currentPercent + percentOneDay
+    if (percent > 98) percent = 100
+    progressBarElem.textContent = percent.toFixed() + `%`
+    progressBarElem.style.width = percent + `%`
 }
 
 const getWeekDaysElement = (habit) => {
@@ -42,7 +43,7 @@ const getWeekDaysElement = (habit) => {
     ).join('')}
 
 const getHabitElement = (habit) => `
-<div class="mb-8 habit" data-id='${habit.id}'>
+<div class="habit" data-id='${habit.id}'>
 <div class="habit-header">
 <img src='${habit.img}' width="70" alt="" />
 <span class="font-semibold text-2xl">${habit.name}</span>
@@ -58,3 +59,27 @@ const render = (habits) => {
 }
 
 render(habits)
+
+// Add habit
+const openForm = () => {
+    document.querySelector('.form').classList.add('open')
+}
+
+const addNewHabit = () => {
+    const inputElem = document.querySelector('.form input')
+    const value = inputElem.value
+    if(!value){ 
+        alert('Habit name is rewquired!')
+        return
+    }
+    habits.unshift({
+        id: habits.length + 1,
+        img: "./assets/img/habit.svg",
+        name: value,
+        completed: [false, false, false, false, false, false, false],
+    })
+
+    render(habits)
+    document.querySelector('.form').classList.remove('open')
+    inputElem.value = ''
+}
